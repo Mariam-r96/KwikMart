@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default function Home(){
     const [products , setProducts ] = useState([0]);
+    const [favourite , setFavourite ] = useState(undefined);
   
     useEffect(() => {
       axios.get(`https://shodai.herokuapp.com/api/products`)
@@ -23,10 +24,14 @@ export default function Home(){
                 {products && products.length > 0 && products.map((product , key) => {
                     return(
                         <div key={key} className='border border-gray-200 h-full'>
-                            <div className='h-36 w-full p-3'>
+                            <div className='h-36 w-full p-3 relative'>
                                 <img 
                                 src={product.image}
                                 className='w-full h-full object-contain'/>
+                                <span class="material-icons absolute top-3 right-4" onClick={ e => setFavourite(key)}>
+                                    {favourite == key ? 'favorite' : 'favorite_border'}
+                                </span>
+                                {/* <span class="material-icons absolute top-6 right-4">favorite_border</span> */}
                             </div>
                             <div className='p-4 h-32'>
                                 <h5 className='text-gray-800 mt-3'>{product.title}</h5>
