@@ -1,0 +1,37 @@
+.custom_dropdown{
+    @apply 
+    bg-secondary-400
+    inline-flex
+    items-center
+    justify-between
+    rounded-3xl
+    border-0
+    text-white
+    pl-4 pr-20 py-3;
+}
+
+.dropdown{
+    &_arrow{
+        border-width: 0 3px 3px 0;
+        padding: 3px;
+        @apply absolute right-5 border-solid border-white inline-block;
+
+        &.arrow_up{
+            transform: rotate(-135deg) ;
+            -webkit-transform: rotate(-135deg) ;
+            top: 43%;
+        }
+        &.arrow_down{
+            transform: rotate(45deg) ;
+            -webkit-transform: rotate(45deg) ;
+            top: 38%;
+        }
+    }
+
+    &_menu{
+        width: unset;
+        min-width: 300px;
+        max-height: unset;
+        @apply mt-4 rounded border-gray-100;
+    }
+}

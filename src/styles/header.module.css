@@ -1,9 +1,0 @@
-.custom_dropdown{
-    @apply 
-    bg-secondary-400
-    inline-block
-    rounded-3xl
-    border-0
-    text-white
-    pl-4 pr-8;
-}
