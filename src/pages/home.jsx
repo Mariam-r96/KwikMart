@@ -15,7 +15,7 @@ export default function Home(){
       });
     }, []);
 
-    console.log("produtcs", products)
+    // console.log("produtcs", products)
     return(
         <div className='container mt-5'>
             <h1 className='text-lg mb-8'>ALL PRODUCTS</h1>
@@ -28,10 +28,9 @@ export default function Home(){
                                 <img 
                                 src={product.image}
                                 className='w-full h-full object-contain'/>
-                                <span class="material-icons absolute top-3 right-4" onClick={ e => setFavourite(key)}>
+                                <span className="material-icons absolute top-3 right-4 cursor-pointer" onClick={ e => setFavourite(key)}>
                                     {favourite == key ? 'favorite' : 'favorite_border'}
                                 </span>
-                                {/* <span class="material-icons absolute top-6 right-4">favorite_border</span> */}
                             </div>
                             <div className='p-4 h-32'>
                                 <h5 className='text-gray-800 mt-3'>{product.title}</h5>

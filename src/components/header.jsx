@@ -1,20 +1,30 @@
-import React , {useEffect , useState} from "react";
+import React , {useEffect , useState, createContext} from "react";
 import { useRouter } from 'next/router'
 import Link from "next/link";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
 import axios from "axios";
+import Home from "../pages/home";
 
-const Header = () => {
-
+const Header = (props) => {
   const [categories , setCategories ] = useState([0]);
+  const [products , setProducts ] = useState([0]);
   const router = useRouter();
+  let filteredProducts = [];
 
   useEffect(() => {
     axios.get(`https://shodai.herokuapp.com/api/products/categories`)
     .then( response => {
       setCategories(response.data);
+    })
+    .catch( error =>{
+      console.log(error);
+    });
+
+    axios.get(`https://shodai.herokuapp.com/api/products`)
+    .then( response => {
+      setProducts(response.data);
     })
     .catch( error =>{
       console.log(error);
@@ -51,6 +61,16 @@ const Header = () => {
     router.push(`/category/${str}`);
   }
 
+  const filterSearch = (e) => {
+    filteredProducts = products.filter(product => {
+      if(product.title.toLowerCase().includes(e.target.value.toLowerCase())){
+        return product;
+      }
+    });
+
+    console.log("filtered",filteredProducts) 
+  }
+
   return(
     <header className="container border-gray-100 border-b">
     <div className="flex items-center py-6 border-gray-100 border-b">
@@ -59,7 +79,7 @@ const Header = () => {
             <span className="text-primary-900 font-bold text-xl">KwikMart</span>
         </a>
         <div className="relative ml-auto mr-5">
-            <input className="bg-gray-100 p-3 rounded-md w-96" type="text" placeholder="Search"/>
+            <input className="bg-gray-100 p-3 rounded-md w-96 search-bar" onChange={e => filterSearch(e)} type="text" placeholder="Search"/>
             <span className="material-symbols-rounded absolute right-4 top-1/2 -translate-y-1/2">search</span>
         </div>
         <span className="material-symbols-rounded cursor-pointer text-3xl mr-5">account_circle</span>
@@ -96,3 +116,4 @@ const Header = () => {
 }
 
 export default Header ;
+export {filteredProducts};
