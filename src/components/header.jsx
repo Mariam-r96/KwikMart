@@ -116,4 +116,3 @@ const Header = (props) => {
 }
 
 export default Header ;
-export {filteredProducts};
