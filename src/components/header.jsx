@@ -5,13 +5,13 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
 import axios from "axios";
-import Home from "../pages/home";
 
-const Header = (props) => {
+const Header = () => {
   const [categories , setCategories ] = useState([0]);
   const [products , setProducts ] = useState([0]);
+  const [filteredProducts , setFilteredProducts ] = useState([]);
+  const [showList , setShowList] = useState(false);
   const router = useRouter();
-  let filteredProducts = [];
 
   useEffect(() => {
     axios.get(`https://shodai.herokuapp.com/api/products/categories`)
@@ -62,14 +62,39 @@ const Header = (props) => {
   }
 
   const filterSearch = (e) => {
-    filteredProducts = products.filter(product => {
-      if(product.title.toLowerCase().includes(e.target.value.toLowerCase())){
-        return product;
-      }
-    });
-
-    console.log("filtered",filteredProducts) 
+    if(e.target.value == ''){
+      setFilteredProducts([]);
+    } else {
+      const filtered_products = products.filter(product => {
+        if(product) {
+            if(product.title.toLowerCase().includes(e.target.value.toLowerCase())){
+                return product;
+            } else {
+              return 0;
+            }
+        }
+      });
+      setFilteredProducts(filtered_products);
+    }
   }
+
+  const selectFilteredItem = (title) => {
+    const str = title.replace(/\s/g, '');
+    router.push({ pathname: 'search', query: { q: str } });
+  }
+
+  const handleBlur = (e) => {
+    window.addEventListener("click" , event => {
+      if(event.target.classList.contains("search-list-item") || event.target == e.target){
+      } else {
+        closeFilteredList();
+      }
+     })
+  }
+  
+  const closeFilteredList= () =>{
+    setShowList(false);
+   }
 
   return(
     <header className="container border-gray-100 border-b">
@@ -79,8 +104,32 @@ const Header = (props) => {
             <span className="text-primary-900 font-bold text-xl">KwikMart</span>
         </a>
         <div className="relative ml-auto mr-5">
-            <input className="bg-gray-100 p-3 rounded-md w-96 search-bar" onChange={e => filterSearch(e)} type="text" placeholder="Search"/>
+            <input 
+            className="bg-gray-100 p-3 rounded-md w-96 header-search-field" 
+            onChange={e => filterSearch(e)} 
+            onFocus={() => setShowList(true)}
+            onBlur={(e) => handleBlur(e)}
+            type="text" 
+            placeholder="Search"/>
             <span className="material-symbols-rounded absolute right-4 top-1/2 -translate-y-1/2">search</span>
+
+            <ul className={`${showList && filteredProducts.length > 0 ? '' : 'hidden'} absolute w-full bg-white shadow-md top-14 max-h-64 overflow-y-auto z-10`}>
+              {filteredProducts && filteredProducts.length > 0 && filteredProducts.map((filteredItem , key) => {
+                return(
+                  <li 
+                  key={key} 
+                  className="search-list-item px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-secondary-50"
+                  onClick={e => selectFilteredItem(filteredItem.title, e)}>
+                    <div className="flex items-center pointer-events-none">
+                      <div className="w-12 mr-4">
+                        <img className="w-full h-full object-cover" src={filteredItem.image} />
+                      </div>
+                       <p>{filteredItem.title}</p> 
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
         </div>
         <span className="material-symbols-rounded cursor-pointer text-3xl mr-5">account_circle</span>
         <div className="cart relative cursor-pointer">

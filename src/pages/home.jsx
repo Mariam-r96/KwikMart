@@ -1,7 +1,7 @@
 import React , {useState , useEffect} from 'react';
 import axios from 'axios';
 
-export default function Home(){
+export default function Home(props){
     const [products , setProducts ] = useState([0]);
     const [favourite , setFavourite ] = useState(undefined);
   
@@ -14,8 +14,7 @@ export default function Home(){
         console.log(error);
       });
     }, []);
-
-    // console.log("produtcs", products)
+    
     return(
         <div className='container mt-5'>
             <h1 className='text-lg mb-8'>ALL PRODUCTS</h1>
