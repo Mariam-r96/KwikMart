@@ -1,7 +1,8 @@
 import React , {useEffect , useState, createContext} from "react";
 import { useRouter } from 'next/router'
 import Link from "next/link";
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
+import { Dropdown } from "flowbite-react";
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
 import axios from "axios";
@@ -31,11 +32,7 @@ const Header = () => {
     });
   }, []);
 
-  const category_options = categories.map(category => {
-    return category.title;
-  })
-
-  category_options.unshift({value : 'All  categories' , label : 'All categories' });
+  // category_options.unshift({value : 'All  categories' , label : 'All categories' });
   
   const menuItems = [
     {
@@ -56,9 +53,9 @@ const Header = () => {
     },
   ];
 
-  const onDropdownSelect = (e) => {
-    const str = e.value.replace(/\s/g, '');
-    router.push(`/category/${str}`);
+  const onDropdownSelect = (title, id) => {
+    const str = title.replace(/\s/g, '-');
+    router.push(`/category/${str}?id=${id}`,`/category/${str}`);
   }
 
   const filterSearch = (e) => {
@@ -138,7 +135,7 @@ const Header = () => {
         </div>
     </div>
     <div className="py-6 flex justify-between items-center">
-      <Dropdown 
+      {/* <Dropdown 
       options={category_options}  
       value={category_options[0]} 
       onChange={e => onDropdownSelect(e)}
@@ -146,7 +143,20 @@ const Header = () => {
       arrowClosed={<span className={`${styles.dropdown_arrow} ${styles.arrow_down}`}/>}
       arrowOpen={<span className={`${styles.dropdown_arrow} ${styles.arrow_up}`}/>}
       controlClassName={styles.custom_dropdown} 
-      menuClassName={styles.dropdown_menu} />
+      menuClassName={styles.dropdown_menu} /> */}
+      <Dropdown
+      className={styles.dropdown_menu} 
+      
+        label="Select Category"
+      >
+        {categories.length > 0 && categories.map(option => {
+          return(
+            <Dropdown.Item onClick={e => onDropdownSelect(option.title, option._id)}>
+              {option.title}
+            </Dropdown.Item>
+          )
+        })}
+      </Dropdown>
 
       <nav>
         <ul className="flex items-center">
