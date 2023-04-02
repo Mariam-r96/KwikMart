@@ -33,7 +33,7 @@ const CategoryBasedProducts = () => {
                         if(product.category == product_category_id){
                             return(
                                 <ProductCard
-                                    key={key}
+                                    index={key}
                                     title={product.title}
                                     price={product.price}
                                     image={product.image}

@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 
 const ProductCard = (props) => {
-    const { title, price , image , key }= props;
+    const { title, price , image , index }= props;
     const [favourite , setFavourite ] = useState(undefined);
 
     return(
-        <div key={key} className='border border-gray-200 h-full'>
+        <div key={index} className='border border-gray-200 h-full'>
             <div className='h-36 w-full p-3 relative'>
                 <img 
                 src={image}

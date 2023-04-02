@@ -21,16 +21,16 @@ const SearchResults = () => {
     }, []);
 
     return(
-        <div className="container mt-5">
+        <div className="container mt-5 px-4">
             <h1 className='text-lg mb-8'>YOUR SEARCHED PRODUCT</h1>
-            <div className='grid grid-cols-5 items-start'>
+            <div className='grid md:grid-cols-3 lg:grid-cols-4 items-start gap-6'>
                 {products && products.length > 0 && products.map( (product , key) => {
                     if(product){
                         if(product._id == searched_id){
 
                             return(
                                 <ProductCard
-                                    key={key}
+                                    index={key}
                                     title={product.title}
                                     price={product.price}
                                     image={product.image}

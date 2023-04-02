@@ -149,9 +149,9 @@ const Header = () => {
       
         label="Select Category"
       >
-        {categories.length > 0 && categories.map(option => {
+        {categories.length > 0 && categories.map((option, key) => {
           return(
-            <Dropdown.Item onClick={e => onDropdownSelect(option.title, option._id)}>
+            <Dropdown.Item key={key} onClick={e => onDropdownSelect(option.title, option._id)}>
               {option.title}
             </Dropdown.Item>
           )
