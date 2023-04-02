@@ -97,7 +97,7 @@ const Header = () => {
     <header className="container border-gray-100 border-b">
     <div className="flex items-center py-6 border-gray-100 border-b">
         <Link href={`/`} className="flex items-center">
-            <span className="material-symbols-rounded text-ternary-400 mr-2 text-4xl font-medium">shopping_cart</span>
+            <span className="material-symbols-rounded text-ternary-500 mr-2 text-4xl font-medium">shopping_cart</span>
             <span className="text-primary-900 font-bold text-xl">KwikMart</span>
         </Link>
         <div className="relative ml-auto mr-5">
