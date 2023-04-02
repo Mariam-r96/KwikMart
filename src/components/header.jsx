@@ -7,8 +7,8 @@ import styles from '@/styles/header.module.scss';
 import axios from "axios";
 
 const Header = () => {
-  const [categories , setCategories ] = useState([0]);
-  const [products , setProducts ] = useState([0]);
+  const [categories , setCategories ] = useState([]);
+  const [products , setProducts ] = useState([]);
   const [filteredProducts , setFilteredProducts ] = useState([]);
   const [showList , setShowList] = useState(false);
   const router = useRouter();
