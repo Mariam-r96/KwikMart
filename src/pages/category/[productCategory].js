@@ -22,8 +22,8 @@ const CategoryBasedProducts = () => {
 
 
     return(
-        <div>
-            <h2>{product_category_title}</h2>
+        <div className="container mt-5">
+            <h1 className='text-xl uppercase mb-8 font-bold text-primary-900'>{product_category_title}</h1>
             <div className='grid grid-cols-5 items-start'>
                 {products && products.length > 0 && products.map( (product , key) => {
                     if(product){
