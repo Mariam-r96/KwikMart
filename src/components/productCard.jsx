@@ -8,7 +8,7 @@ const ProductCard = (props) => {
         <div key={index} className='border border-gray-200 h-full'>
             <div className='h-36 w-full p-3 relative'>
                 <img 
-                src={image}
+                src={image ? image : '/assets/no-image.png'}
                 className='w-full h-full object-contain'/>
                 <span className="material-icons absolute top-3 right-4 cursor-pointer" onClick={ e => setFavourite(key)}>
                     {/* {favourite == key ? 'favorite' : 'favorite_border'} */}

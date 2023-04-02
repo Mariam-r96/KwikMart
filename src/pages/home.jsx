@@ -3,8 +3,7 @@ import ProductCard from '../components/productCard';
 import axios from 'axios';
 
 export default function Home(props){
-    const [products , setProducts ] = useState([0]);
-    const [favourite , setFavourite ] = useState(undefined);
+    const [products , setProducts ] = useState([]);
   
     useEffect(() => {
       axios.get(`https://shodai.herokuapp.com/api/products`)
@@ -24,6 +23,7 @@ export default function Home(props){
                 {products && products.length > 0 && products.map((product , key) => {
                     return(
                         <ProductCard
+                            key={key}
                             index={key}
                             title={product.title}
                             price={product.price}
