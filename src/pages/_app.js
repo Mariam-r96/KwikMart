@@ -1,5 +1,6 @@
 import Head from "next/head";
 import '@/styles/globals.scss';
+import Layout from '@/pages/layout.jsx'
 
 export default function MyApp({ Component, pageProps }) {
 	return (
@@ -17,7 +18,9 @@ export default function MyApp({ Component, pageProps }) {
                 content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
                 />
 			</Head>
+			<Layout>
 			<Component {...pageProps} />
+			</Layout>
 		</>
 	);
 }
