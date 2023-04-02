@@ -24,10 +24,10 @@ const CategoryBasedProducts = () => {
 
 
     return(
-        <div className="container mt-5">
+        <div className="container mt-5 px-4">
             <BreadCrumb/>
             <h1 className='ext-lg my-8 uppercase'>{product_category_title}</h1>
-            <div className='grid grid-cols-4 items-start gap-6'>
+            <div className='grid md:grid-cols-3 lg:grid-cols-4 items-start gap-6'>
                 {products && products.length > 0 && products.map( (product , key) => {
                     if(product){
                         if(product.category == product_category_id){

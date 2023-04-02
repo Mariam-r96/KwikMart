@@ -17,10 +17,10 @@ export default function Home(props){
     }, []);
     
     return(
-        <div className='container mt-5'>
+        <div className='container mt-5 px-4'>
             <h1 className='text-lg mb-8'>ALL PRODUCTS</h1>
 
-            <div className='grid grid-cols-5 items-start'>
+            <div className='grid md:grid-cols-3 lg:grid-cols-5 items-start'>
                 {products && products.length > 0 && products.map((product , key) => {
                     return(
                         <ProductCard
