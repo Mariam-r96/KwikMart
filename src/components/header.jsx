@@ -96,10 +96,10 @@ const Header = () => {
   return(
     <header className="container border-gray-100 border-b">
     <div className="flex items-center py-6 border-gray-100 border-b">
-        <a href="#" className="flex items-center">
+        <Link href={`/`} className="flex items-center">
             <span className="material-symbols-rounded text-ternary-400 mr-2 text-4xl font-medium">shopping_cart</span>
             <span className="text-primary-900 font-bold text-xl">KwikMart</span>
-        </a>
+        </Link>
         <div className="relative ml-auto mr-5">
             <input 
             className="bg-gray-100 p-3 rounded-md w-96 header-search-field" 
