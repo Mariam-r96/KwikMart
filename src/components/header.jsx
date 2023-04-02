@@ -1,7 +1,6 @@
 import React , {useEffect , useState, createContext} from "react";
 import { useRouter } from 'next/router'
 import Link from "next/link";
-// import Dropdown from 'react-dropdown';
 import { Dropdown } from "flowbite-react";
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
@@ -135,15 +134,6 @@ const Header = () => {
         </div>
     </div>
     <div className="py-6 flex justify-between items-center">
-      {/* <Dropdown 
-      options={category_options}  
-      value={category_options[0]} 
-      onChange={e => onDropdownSelect(e)}
-      placeholder="Categories"
-      arrowClosed={<span className={`${styles.dropdown_arrow} ${styles.arrow_down}`}/>}
-      arrowOpen={<span className={`${styles.dropdown_arrow} ${styles.arrow_up}`}/>}
-      controlClassName={styles.custom_dropdown} 
-      menuClassName={styles.dropdown_menu} /> */}
       <Dropdown
       className={styles.dropdown_menu} 
       
