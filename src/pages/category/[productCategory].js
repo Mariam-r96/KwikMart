@@ -23,14 +23,14 @@ const CategoryBasedProducts = () => {
 
     return(
         <div className="container mt-5">
-            <h1 className='text-xl uppercase mb-8 font-bold text-primary-900'>{product_category_title}</h1>
+            <h1 className='ext-lg mb-8 uppercase'>{product_category_title}</h1>
             <div className='grid grid-cols-5 items-start'>
                 {products && products.length > 0 && products.map( (product , key) => {
                     if(product){
                         if(product.category == product_category_id){
                             return(
                                 <ProductCard
-                                    key={product.key}
+                                    key={key}
                                     title={product.title}
                                     price={product.price}
                                     image={product.image}

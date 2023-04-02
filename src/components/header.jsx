@@ -75,9 +75,9 @@ const Header = () => {
     }
   }
 
-  const selectFilteredItem = (title) => {
-    const str = title.replace(/\s/g, '');
-    router.push({ pathname: 'search', query: { q: str } });
+  const selectFilteredItem = (title, id) => {
+    const str = title.replace(/\s/g, '-');
+    router.push({ pathname: 'search', query: { q: str , id: id } }, `/search/?q=${str}`);
   }
 
   const handleBlur = (e) => {
@@ -116,7 +116,7 @@ const Header = () => {
                   <li 
                   key={key} 
                   className="search-list-item px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-secondary-50"
-                  onClick={e => selectFilteredItem(filteredItem.title, e)}>
+                  onClick={e => selectFilteredItem(filteredItem.title, filteredItem._id)}>
                     <div className="flex items-center pointer-events-none">
                       <div className="w-12 mr-4">
                         <img className="w-full h-full object-cover" src={filteredItem.image} />

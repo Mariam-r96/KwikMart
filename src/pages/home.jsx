@@ -24,7 +24,7 @@ export default function Home(props){
                 {products && products.length > 0 && products.map((product , key) => {
                     return(
                         <ProductCard
-                            key={product.key}
+                            key={key}
                             title={product.title}
                             price={product.price}
                             image={product.image}

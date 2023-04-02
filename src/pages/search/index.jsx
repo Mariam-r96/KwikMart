@@ -1,9 +1,45 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useRouter } from 'next/router';
+import ProductCard from "../../components/productCard";
+import axios from "axios";
 
 const SearchResults = () => {
+    const [products , setProducts ] = useState([]);
+    const router = useRouter();
+    const searched_id = router.query.id;
+
+    console.log(searched_id)
+  
+    useEffect(() => {
+        axios.get(`https://shodai.herokuapp.com/api/products`)
+        .then( response => {
+          setProducts(response.data);
+        })
+        .catch( error =>{
+          console.log(error);
+        });
+    }, []);
+
     return(
-        <div>
-            <h2> Searched Product</h2>
+        <div className="container mt-5">
+            <h1 className='text-lg mb-8'>YOUR SEARCHED PRODUCT</h1>
+            <div className='grid grid-cols-5 items-start'>
+                {products && products.length > 0 && products.map( (product , key) => {
+                    if(product){
+                        if(product._id == searched_id){
+
+                            return(
+                                <ProductCard
+                                    key={key}
+                                    title={product.title}
+                                    price={product.price}
+                                    image={product.image}
+                                />
+                            );
+                        } 
+                    }
+                })}
+            </div>
         </div>
     )
 }
