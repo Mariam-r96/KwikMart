@@ -57,7 +57,7 @@ const ProductAd = (props) => {
         before:inset-0
         ${alignContent == 'left' || 'center' ? ' before:bg-gradient-to-l from-gray-50/10 to-black/60' : ' before:bg-gradient-to-r from-gray-50/10 to-black/60'}
         `}>
-            <div className="text-content max-w-[80%] text-white relative">
+            <div className="text-content lg:max-w-[80%] text-white relative">
                 <h3 className="font-bold  text-2xl font-sans">{title}</h3>
                 <p className="mt-4">{subtitle}</p>
                 <button className="p-3 rounded-lg text-white mt-10">Shop Now</button>

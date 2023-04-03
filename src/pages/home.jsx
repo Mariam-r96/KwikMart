@@ -30,7 +30,7 @@ const Home = (props) =>{
     return(
         <div className='container mt-5 px-4'>
             <div className='grid grid-cols-12 gap-8 mt-8'>
-                <div className='col-span-full md:col-span-8'>
+                <div className='col-span-full md:col-span-6 lg:col-span-8'>
                     <ProductAd
                      bgImg={'/assets/grocery-shopping.jpg'}
                      apiCategoryIndex={'2'}
@@ -38,7 +38,7 @@ const Home = (props) =>{
                      title={'Feed your family the best'}
                      subtitle = {'KwikMart Weekend Discount '}/>
                 </div>
-                <div className='col-span-full md:col-span-4'>
+                <div className='col-span-full md:col-span-6 lg:col-span-4'>
                     <ProductAd
                     bgImg={'/assets/baby.jpg'}
                     apiCategoryIndex={'5'}
