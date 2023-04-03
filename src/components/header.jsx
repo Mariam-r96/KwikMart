@@ -77,6 +77,10 @@ const Header = () => {
   const selectFilteredItem = (title, id) => {
     const str = title.replace(/\s/g, '-');
     router.push({ pathname: 'search', query: { q: str , id: id } }, `/search/?q=${str}`);
+
+    setTimeout(() => {
+      closeFilteredList();
+    }, 50);
   }
 
   const handleBlur = (e) => {
