@@ -69,6 +69,16 @@ const MainLayout = (props) => {
       setSubTotal(new_subtotal);
     }
 
+    const incrementQuantity = (item) =>{
+      let existing_cart = [...cart];
+      let existingItem_index = cart.indexOf(item);
+      existing_cart[existingItem_index].qty = existing_cart[existingItem_index].qty + 1;
+      setCart(existing_cart);
+      let new_subtotal = subTotal + item.price;
+      setSubTotal(new_subtotal);
+      localStorage.setItem("cart" , JSON.stringify(existing_cart));
+    }
+
     return(
         <>
             <Header 
@@ -85,7 +95,8 @@ const MainLayout = (props) => {
                       quantity, 
                       setQuantity,
                       addToCart,
-                      deleteCartItem}, null)
+                      deleteCartItem,
+                      incrementQuantity}, null)
                 })}
             <Footer/>
         </>

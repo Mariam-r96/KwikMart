@@ -3,6 +3,12 @@ import React, {useState, useEffect} from "react";
 const ProductCard = (props) => {
   const { index, product ,cart, setCart, quantity, setQuantity, addToCart } = props;
     const [favourite , setFavourite ] = useState(undefined);
+    const [showButton, setShowButton] = useState(true);
+
+    const handleClick = (item) => {
+        addToCart(item);
+        setShowButton(false);
+    }
   
 
     return(
@@ -21,7 +27,17 @@ const ProductCard = (props) => {
                 <p className='mt-3 text-red-500'>$ {product.price}</p>
             </div>
             <div className='text-center p-6'>
-                <button className='bg-sky-400 px-6 py-3 text-white rounded-xl' onClick={e => addToCart(product)}>ADD TO CART</button>
+                {showButton ? 
+                    <button className='bg-sky-400 w-4/5 px-6 py-3 text-white rounded-3xl' onClick={e => handleClick(product)}>ADD TO CART</button>
+                    :
+                    <div className='flex rounded-3xl w-4/5 mx-auto'>
+                        <button className={`bg-gray-300 px-6 text-lg text-white rounded-l-3xl`}>-</button>
+                        <input className="w-full py-3 text-center border-l border-gray-300 focus-within:outline-none" readOnly type="text" value={product.qty}/>
+                        <button 
+                        onClick={()=> props.incrementQuantity(product)}
+                        className={`bg-ternary-400 px-6 text-lg rounded-r-3xl`}>+</button>
+                    </div>
+                }
             </div>
         </div>
     )

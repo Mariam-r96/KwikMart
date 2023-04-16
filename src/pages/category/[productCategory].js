@@ -6,7 +6,7 @@ import BreadCrumb from "../../components/breadcrumb";
 
 
 const CategoryBasedProducts = (props) => {
-    const {cart, setCart, quantity, setQuantity, addToCart } = props;
+    const {cart, setCart, quantity, setQuantity, addToCart , incrementQuantity} = props;
     const [products , setProducts ] = useState([]);
     const router = useRouter();
     const query = router.query;
@@ -40,6 +40,7 @@ const CategoryBasedProducts = (props) => {
                                     quantity={quantity}
                                     setQuantity={setQuantity}
                                     addToCart={addToCart}
+                                    incrementQuantity={incrementQuantity}
                                 />
                             );
                         } 

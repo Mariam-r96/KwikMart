@@ -30,8 +30,14 @@ const SearchResults = () => {
 
                             return(
                                 <ProductCard
-                                    index={key}
-                                    product={product}
+                                index={key}
+                                product={product}
+                                cart={cart}
+                                setCart={setCart}
+                                quantity={quantity}
+                                setQuantity={setQuantity}
+                                addToCart={addToCart}
+                                incrementQuantity={incrementQuantity}
                                 />
                             );
                         } 
