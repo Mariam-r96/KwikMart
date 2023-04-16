@@ -5,7 +5,8 @@ import ProductCard from "../../components/productCard";
 import BreadCrumb from "../../components/breadcrumb";
 
 
-const CategoryBasedProducts = () => {
+const CategoryBasedProducts = (props) => {
+    const {cart, setCart, quantity, setQuantity, addToCart } = props;
     const [products , setProducts ] = useState([]);
     const router = useRouter();
     const query = router.query;
@@ -22,7 +23,6 @@ const CategoryBasedProducts = () => {
         });
       }, []);
 
-
     return(
         <div className="container mt-5 px-4">
             <BreadCrumb/>
@@ -34,9 +34,12 @@ const CategoryBasedProducts = () => {
                             return(
                                 <ProductCard
                                     index={key}
-                                    title={product.title}
-                                    price={product.price}
-                                    image={product.image}
+                                    product={product}
+                                    cart={cart}
+                                    setCart={setCart}
+                                    quantity={quantity}
+                                    setQuantity={setQuantity}
+                                    addToCart={addToCart}
                                 />
                             );
                         } 

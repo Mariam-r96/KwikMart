@@ -6,13 +6,14 @@ import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
 import axios from "axios";
 
-const Header = () => {
+const Header = (props) => {
   const [categories , setCategories ] = useState([]);
   const [products , setProducts ] = useState([]);
   const [filteredProducts , setFilteredProducts ] = useState([]);
   const [showList , setShowList] = useState(false);
+  const [showCart , setShowCart] = useState(false);
   const router = useRouter();
-
+  
   useEffect(() => {
     axios.get(`https://shodai.herokuapp.com/api/products/categories`)
     .then( response => {
@@ -132,12 +133,15 @@ const Header = () => {
             </ul>
         </div>
         <span className="material-symbols-rounded cursor-pointer text-3xl mr-5">account_circle</span>
-        <div className="cart relative cursor-pointer">
+        <div 
+        className="cart relative cursor-pointer"
+        onMouseEnter={() => setShowCart(true)}>
             <span className="material-symbols-rounded text-red-600 p-2 bg-red-200 rounded-full">local_mall</span>
-            <span className="rounded-full bg-red-600 text-white text-[12px] text-center w-5 h-5 leading-5 absolute -top-2 -right-1">0</span>
+            <span className="rounded-full bg-red-600 text-white text-[12px] text-center w-5 h-5 leading-5 absolute -top-2 -right-1">{props.totalItems}</span>
         </div>
     </div>
-    <div className="py-6 flex justify-between items-center">
+
+    <div className="py-6 flex justify-between items-center relative">
       <Dropdown
       className={styles.dropdown_menu} 
       
@@ -151,7 +155,6 @@ const Header = () => {
           )
         })}
       </Dropdown>
-
       <nav>
         <ul className="flex items-center">
           {menuItems && menuItems.length > 0 && menuItems.map( (item , key ) => {
@@ -163,6 +166,24 @@ const Header = () => {
           })}
         </ul>
       </nav>
+      <ul className={`${showCart ? '' : 'hidden'} px-4 absolute rounded-md shadow-lg border border-gray-100 bg-white -top-1 right-0 z-20`}>
+          {props.cart && props.cart.length > 0 && props.cart.map(cartItem => {
+            return(
+              <li className="flex items-center py-3 border-b border-gray-200">
+                <div className="h-full w-10 mr-4 relative">
+                  <span
+                  onClick = {()=> props.deleteCartItem(cartItem)}
+                  className="material-icons absolute -top-2 -left-2 text-base text-orange-600 cursor-pointer">cancel</span>
+                  <img className="w-full h-full object-cover" src={cartItem.image}/>
+                </div>
+                <div className="flex flex-col text-gray-700">
+                  <h5 className="font-medium text-sm">{cartItem.title}</h5>
+                  <p className="text-sm mt-2 font-sans">{cartItem.qty} x <span className="text-red-600">${cartItem.price}</span></p>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
     </div>
     </header>
   );

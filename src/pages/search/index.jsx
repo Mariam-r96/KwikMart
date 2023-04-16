@@ -31,9 +31,7 @@ const SearchResults = () => {
                             return(
                                 <ProductCard
                                     index={key}
-                                    title={product.title}
-                                    price={product.price}
-                                    image={product.image}
+                                    product={product}
                                 />
                             );
                         } 

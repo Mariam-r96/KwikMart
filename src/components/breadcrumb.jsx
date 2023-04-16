@@ -14,7 +14,7 @@ const BreadCrumb = () => {
     return(
         <Breadcrumb>
             <Breadcrumb.Item href="/">
-            <span class="material-icons text-[17px] mr-1">home</span>
+            <span className="material-icons text-[17px] mr-1">home</span>
                 Home
             </Breadcrumb.Item>
                 
