@@ -134,8 +134,9 @@ const Header = (props) => {
         </div>
         <span className="material-symbols-rounded cursor-pointer text-3xl mr-5">account_circle</span>
         <div 
-        className="cart relative cursor-pointer"
-        onMouseEnter={() => setShowCart(true)}>
+        className="cart relative cursor-pointer before:content-[''] before:absolute before:h-12 before:w-20 before:bg-transparent before:-bottom-8 before:-left-1/2"
+        onMouseEnter={() => setShowCart(true)}
+        onMouseLeave={() => setShowCart(false)}>
             <span className="material-symbols-rounded text-red-600 p-2 bg-red-200 rounded-full">local_mall</span>
             <span className="rounded-full bg-red-600 text-white text-[12px] text-center w-5 h-5 leading-5 absolute -top-2 -right-1">{props.totalItems}</span>
         </div>
@@ -166,10 +167,16 @@ const Header = (props) => {
           })}
         </ul>
       </nav>
-      <ul className={`${showCart ? '' : 'hidden'} px-4 absolute rounded-md shadow-lg border border-gray-100 bg-white -top-1 right-0 z-20`}>
-          {props.cart && props.cart.length > 0 && props.cart.map(cartItem => {
+      <div 
+      onMouseEnter={() => setShowCart(true)}
+      onMouseLeave={() => setShowCart(false)}
+      className={`${showCart ? '' : 'hidden'} pb-4 px-4 w-80 absolute rounded-md shadow-lg border border-gray-100 bg-white -top-1 right-0 z-20`}>
+      {props.cart && props.cart.length > 0 ? 
+        <>
+          <ul className={`px-0`}>
+          {props.cart.map((cartItem , key) => {
             return(
-              <li className="flex items-center py-3 border-b border-gray-200">
+              <li key={key} className="flex items-center py-3 border-b border-gray-200">
                 <div className="h-full w-10 mr-4 relative">
                   <span
                   onClick = {()=> props.deleteCartItem(cartItem)}
@@ -183,7 +190,19 @@ const Header = (props) => {
               </li>
             )
           })}
-        </ul>
+          </ul>
+          <div className="py-6 flex items-center justify-between">
+            <span className="text-gray-500">SubTotal:</span>
+            <span className="text-red-600 font-medium">${props.subTotal}</span>
+          </div>
+          <button className="block bg-white border border-gray-200 w-full p-3">View Cart</button>
+          <button className="block bg-red-600 mt-3 text-white w-full p-3">Checkout</button>
+        </>
+      : <div className="p-10 flex justify-center flex-col items-center">
+          <span class="material-icons bg-gray-300 rounded-full p-5 text-red-500">local_mall</span>
+          <h5 className="font-medium mt-3 text-gray-600">No products in the cart.</h5>
+        </div>}
+      </div>
     </div>
     </header>
   );
