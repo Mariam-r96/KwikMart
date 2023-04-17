@@ -193,7 +193,7 @@ const Header = (props) => {
           </ul>
           <div className="py-6 flex items-center justify-between">
             <span className="text-gray-500">SubTotal:</span>
-            <span className="text-red-600 font-medium">${props.subTotal}</span>
+            <span className="text-red-600 font-medium">${props.subTotal.toFixed(2)}</span>
           </div>
           <button className="block bg-white border border-gray-200 w-full p-3">View Cart</button>
           <button className="block bg-red-600 mt-3 text-white w-full p-3">Checkout</button>

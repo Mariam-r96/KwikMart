@@ -79,6 +79,21 @@ const MainLayout = (props) => {
       localStorage.setItem("cart" , JSON.stringify(existing_cart));
     }
 
+    const decrementQuantity = (item) => {
+      let existing_cart = [...cart];
+      let existingItem_index = cart.indexOf(item);
+
+      if( existing_cart[existingItem_index].qty > 1){
+        existing_cart[existingItem_index].qty = existing_cart[existingItem_index].qty - 1;
+        setCart(existing_cart);
+        let new_subtotal = subTotal - item.price;
+        setSubTotal(new_subtotal);
+        localStorage.setItem("cart" , JSON.stringify(existing_cart));
+      } else {
+        deleteCartItem(item);
+      }
+    }
+
     return(
         <>
             <Header 
@@ -96,7 +111,8 @@ const MainLayout = (props) => {
                       setQuantity,
                       addToCart,
                       deleteCartItem,
-                      incrementQuantity}, null)
+                      incrementQuantity,
+                      decrementQuantity}, null)
                 })}
             <Footer/>
         </>

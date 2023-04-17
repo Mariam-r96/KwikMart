@@ -4,9 +4,8 @@ import axios from "axios";
 import ProductCard from "../../components/productCard";
 import BreadCrumb from "../../components/breadcrumb";
 
-
 const CategoryBasedProducts = (props) => {
-    const {cart, setCart, quantity, setQuantity, addToCart , incrementQuantity} = props;
+    const {cart, setCart, quantity, setQuantity, addToCart , incrementQuantity, decrementQuantity} = props;
     const [products , setProducts ] = useState([]);
     const router = useRouter();
     const query = router.query;
@@ -41,6 +40,7 @@ const CategoryBasedProducts = (props) => {
                                     setQuantity={setQuantity}
                                     addToCart={addToCart}
                                     incrementQuantity={incrementQuantity}
+                                    decrementQuantity={decrementQuantity}
                                 />
                             );
                         } 

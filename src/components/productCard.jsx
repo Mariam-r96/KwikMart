@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 const ProductCard = (props) => {
-  const { index, product ,cart, setCart, quantity, setQuantity, addToCart } = props;
+  const { index, product , quantity, setQuantity, addToCart ,incrementQuantity , decrementQuantity} = props;
     const [favourite , setFavourite ] = useState(undefined);
     const [showButton, setShowButton] = useState(true);
 
@@ -9,7 +9,15 @@ const ProductCard = (props) => {
         addToCart(item);
         setShowButton(false);
     }
-  
+
+    const handleDecrement = (item) => {
+        if(item.qty > 1){
+            decrementQuantity(item);
+        } else {
+            decrementQuantity(item);
+            setShowButton(true);
+        }
+    }
 
     return(
         <div key={index} className='border border-gray-200 h-full'>
@@ -28,13 +36,17 @@ const ProductCard = (props) => {
             </div>
             <div className='text-center p-6'>
                 {showButton ? 
-                    <button className='bg-sky-400 w-4/5 px-6 py-3 text-white rounded-3xl' onClick={e => handleClick(product)}>ADD TO CART</button>
+                    <button 
+                    className='bg-sky-400 w-4/5 px-6 py-4 text-white rounded-3xl' 
+                    onClick={e => handleClick(product)}>ADD TO CART</button>
                     :
                     <div className='flex rounded-3xl w-4/5 mx-auto'>
-                        <button className={`bg-gray-300 px-6 text-lg text-white rounded-l-3xl`}>-</button>
-                        <input className="w-full py-3 text-center border-l border-gray-300 focus-within:outline-none" readOnly type="text" value={product.qty}/>
                         <button 
-                        onClick={()=> props.incrementQuantity(product)}
+                        onClick={()=> handleDecrement(product)}
+                        className={`bg-gray-300 px-6 text-lg text-white rounded-l-3xl`}>-</button>
+                        <input className="w-full py-3 text-center border-l border-gray-300 focus:shadow-none focus:border-gray-300 focus:ring-0" readOnly type="text" value={product.qty}/>
+                        <button 
+                        onClick={()=> incrementQuantity(product)}
                         className={`bg-ternary-400 px-6 text-lg rounded-r-3xl`}>+</button>
                     </div>
                 }
