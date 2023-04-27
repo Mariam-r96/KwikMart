@@ -112,7 +112,9 @@ const MainLayout = (props) => {
                       addToCart,
                       deleteCartItem,
                       incrementQuantity,
-                      decrementQuantity}, null)
+                      decrementQuantity,
+                      subTotal,
+                    }, null)
                 })}
             <Footer/>
         </>

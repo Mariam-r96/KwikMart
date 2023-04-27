@@ -199,7 +199,7 @@ const Header = (props) => {
           <button className="block bg-red-600 mt-3 text-white w-full p-3">Checkout</button>
         </>
       : <div className="p-10 flex justify-center flex-col items-center">
-          <span class="material-icons bg-gray-300 rounded-full p-5 text-red-500">local_mall</span>
+          <span className="material-icons bg-gray-300 rounded-full p-5 text-red-500">local_mall</span>
           <h5 className="font-medium mt-3 text-gray-600">No products in the cart.</h5>
         </div>}
       </div>
