@@ -19,20 +19,16 @@ const Cart = (props) => {
     'Mirpur', 'Dhanmondi', 'Gulshan' , 'Bashundhara' , 'Banani'
   ];
 
-//   const expandAddressFields = () => {
-//     setExpand(!expand);
-//   }
-
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 px-4">
       <BreadCrumb />
       {cart && cart.length > 0 ? (
         <div className="grid grid-cols-12 mt-8 gap-8">
-            <div className="col-span-8">
+            <div className="col-span-full md:col-span-8">
                 <Table>
                 <Table.Head>
                     <Table.HeadCell>Product</Table.HeadCell>
-                    <Table.HeadCell>Price (qty : 1)</Table.HeadCell>
+                    <Table.HeadCell className="whitespace-nowrap">Price (qty : 1)</Table.HeadCell>
                     <Table.HeadCell>Quantity</Table.HeadCell>
                     <Table.HeadCell>Subtotal</Table.HeadCell>
                     <Table.HeadCell>
@@ -88,23 +84,23 @@ const Cart = (props) => {
                     })}
                 </Table.Body>
                 </Table>
-                <div className="flex justify-between items-center mt-6">
-                <div className="flex items-center">
+                <div className="flex flex-col md:flex-row justify-between items-center mt-6">
+                <div className="flex items-center justify-between md:justify-start">
                     <input
                     type="text"
-                    className="bg-gray-100 border-0 rounded-md font-sans"
+                    className="bg-gray-100 border-0 rounded-md font-sans w-3/5 md:w-auto"
                     placeholder="Coupon code"
                     />
                     <button className="bg-primary-900 px-5 py-2 text-white rounded-md ml-3 text-sm">
                     Apply Coupon
                     </button>
                 </div>
-                <button className="bg-primary-900 px-5 py-2 text-white rounded-md ml-3 text-sm">
+                <button className="bg-primary-900 px-5 py-2 text-white rounded-md ml-3 text-sm mt-4 w-full md:mt-0 md:w-auto">
                     Remove All
                 </button>
                 </div>
             </div>
-            <div className="col-span-4">
+            <div className="col-span-full md:col-span-4">
                 <div className="border border-gray-200 rounded-md p-4">
                     <div className="py-2 border-b border-gray-200 text-lg">Cart Totals</div>
                     <div className="py-3 border-b border-gray-200 flex justify-between items-center">
