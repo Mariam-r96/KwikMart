@@ -54,7 +54,8 @@ const Header = (props) => {
   ];
 
   const onDropdownSelect = (title, id) => {
-    const str = title.replace(/\s/g, '-');
+    let str = title.replace(/\s/g, '-').toLowerCase();
+    str = str.replace(/&/g, 'and');
     router.push(`/category/${str}?id=${id}`,`/category/${str}`);
   }
 

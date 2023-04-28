@@ -71,8 +71,10 @@ const MainLayout = (props) => {
 
     const incrementQuantity = (item) =>{
       let existing_cart = [...cart];
-      let existingItem_index = cart.indexOf(item);
-      existing_cart[existingItem_index].qty = existing_cart[existingItem_index].qty + 1;
+      let existingItem = existing_cart.find((cartItem) => cartItem._id == item._id);
+      let existingItem_index = cart.indexOf(existingItem);
+      item.qty = item.qty + 1;
+      Object.assign( existing_cart[existingItem_index], {qty: item.qty});
       setCart(existing_cart);
       let new_subtotal = subTotal + item.price;
       setSubTotal(new_subtotal);
@@ -81,10 +83,12 @@ const MainLayout = (props) => {
 
     const decrementQuantity = (item) => {
       let existing_cart = [...cart];
-      let existingItem_index = cart.indexOf(item);
+      let existingItem = existing_cart.find((cartItem) => cartItem._id == item._id);
+      let existingItem_index = cart.indexOf(existingItem);
 
       if( existing_cart[existingItem_index].qty > 1){
-        existing_cart[existingItem_index].qty = existing_cart[existingItem_index].qty - 1;
+        item.qty = item.qty - 1;
+        Object.assign( existing_cart[existingItem_index], {qty: item.qty});
         setCart(existing_cart);
         let new_subtotal = subTotal - item.price;
         setSubTotal(new_subtotal);

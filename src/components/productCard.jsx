@@ -5,6 +5,12 @@ const ProductCard = (props) => {
     const [favourite , setFavourite ] = useState(undefined);
     const [showButton, setShowButton] = useState(true);
 
+    useEffect(() => {
+        if(product.qty > 0){
+            setShowButton(false)
+        }
+    }, [product]);
+
     const handleClick = (item) => {
         addToCart(item);
         setShowButton(false);
