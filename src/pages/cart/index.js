@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import BreadCrumb from "../../components/breadcrumb";
 import { Table } from "flowbite-react";
 import Dropdown from "react-dropdown";
-import { useState } from "react";
+import axios from "axios";
 
 const Cart = (props) => {
   const {
@@ -12,6 +13,16 @@ const Cart = (props) => {
     decrementQuantity,
     deleteCartItem,
   } = props;
+
+  useEffect(() => {
+    axios.post(`https://shodai.herokuapp.com/api/orders` , {cart})
+    .then( response => {
+      console.log(response);
+    })
+    .catch( error =>{
+      console.log(error);
+    });
+  }, []);
 
   const [expand, setExpand] = useState(false);
 
