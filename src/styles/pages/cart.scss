@@ -13,6 +13,6 @@
     }
 
     .Dropdown-menu{
-        @apply border-gray-200 mt-1;
+        @apply border-gray-200 mt-1 relative max-h-32;
     }
 }

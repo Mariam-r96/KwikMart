@@ -125,7 +125,7 @@ const Cart = (props) => {
                             <span 
                             onClick={e => setExpand(!expand)}
                             className="text-secondary-400 text-sm font-medium cursor-pointer hover:underline">Change address</span>
-                            <div className={`${expand ? 'max-h-[233px]' : 'max-h-0'} overflow-hidden mt-5 transition-all ease-linear duration-500`}>
+                            <div className={`${expand ? 'max-h-[277px]' : 'max-h-0'} overflow-hidden mt-5 transition-all ease-linear duration-500`}>
                                 <Dropdown 
                                 options={options} 
                                 value={options[0]} 
