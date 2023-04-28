@@ -135,8 +135,8 @@ const Cart = (props) => {
                         <span className="font-medium">Total</span>
                         <span className="font-medium text-lg"> ${(subTotal+ 25).toFixed(2)}</span>
                     </div>
-                    <Link href={`/cart`} 
-                    className="bg-ternary-400 mt-4 px-5 py-3 w-full text-primary-900 font-medium rounded-md text-sm">
+                    <Link href={`/checkout`} 
+                    className="bg-ternary-400 block text-center mt-4 px-5 py-3 text-primary-900 font-medium rounded-md text-sm">
                         Proceed to checkout
                     </Link>
                 </div>

@@ -195,8 +195,12 @@ const Header = (props) => {
             <span className="text-gray-500">SubTotal:</span>
             <span className="text-red-600 font-medium">${props.subTotal.toFixed(2)}</span>
           </div>
-          <button className="block bg-white border border-gray-200 w-full p-3">View Cart</button>
-          <button className="block bg-red-600 mt-3 text-white w-full p-3">Checkout</button>
+          <Link 
+          href={'/cart'} 
+          className="block bg-white border border-gray-200 p-3 text-center">View Cart</Link>
+          <Link 
+          href={'/checkout'}
+          className="block bg-red-600 mt-3 text-white p-3 text-center">Checkout</Link>
         </>
       : <div className="p-10 flex justify-center flex-col items-center">
           <span className="material-icons bg-gray-300 rounded-full p-5 text-red-500">local_mall</span>
