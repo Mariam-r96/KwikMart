@@ -34,3 +34,16 @@
         @apply mt-4 rounded border-gray-100;
     }
 }
+
+.mobile_menu {
+    @apply 
+    absolute md:relative
+    w-full md:w-auto
+    z-20
+    bg-white
+    left-0;
+}
+
+.custom_navbar_toggle{
+    @apply bg-transparent focus:bg-transparent focus:ring-0 ;
+}
