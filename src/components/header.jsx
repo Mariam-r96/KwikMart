@@ -134,6 +134,7 @@ const Header = (props) => {
         </div>
         <span className="material-symbols-rounded cursor-pointer text-3xl mr-5">account_circle</span>
         <div 
+        onClick={e => router.push(`/cart`)}
         className="cart relative cursor-pointer before:content-[''] before:absolute before:h-12 before:w-20 before:bg-transparent before:-bottom-8 before:-left-1/2"
         onMouseEnter={() => setShowCart(true)}
         onMouseLeave={() => setShowCart(false)}>
