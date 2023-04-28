@@ -1,6 +1,8 @@
 import Link from "next/link";
 import BreadCrumb from "../../components/breadcrumb";
 import { Table } from "flowbite-react";
+import Dropdown from "react-dropdown";
+import { useState } from "react";
 
 const Cart = (props) => {
   const {
@@ -10,6 +12,16 @@ const Cart = (props) => {
     decrementQuantity,
     deleteCartItem,
   } = props;
+
+  const [expand, setExpand] = useState(false);
+
+  const options = [
+    'Mirpur', 'Dhanmondi', 'Gulshan' , 'Bashundhara' , 'Banani'
+  ];
+
+//   const expandAddressFields = () => {
+//     setExpand(!expand);
+//   }
 
   return (
     <div className="container mt-5">
@@ -93,7 +105,7 @@ const Cart = (props) => {
                 </div>
             </div>
             <div className="col-span-4">
-                <div className="border border-gray-200 rounded-md px-3">
+                <div className="border border-gray-200 rounded-md p-4">
                     <div className="py-2 border-b border-gray-200 text-lg">Cart Totals</div>
                     <div className="py-3 border-b border-gray-200 flex justify-between items-center">
                         <span className="font-medium">Subtotal</span>
@@ -101,14 +113,32 @@ const Cart = (props) => {
                     </div>
                     <div className="py-3 border-b border-gray-200 flex justify-between items-center">
                         <span className="font-medium">Shipping</span>
-                        <div className="flex flex-col text-right">
+                        <div className="flex flex-col text-right w-1/2">
                             <span>$25</span>
-                            <span className="text-secondary-400 text-sm font-medium cursor-pointer hover:underline">Change address</span>
-                            <div>
-                                
+                            <span 
+                            onClick={e => setExpand(!expand)}
+                            className="text-secondary-400 text-sm font-medium cursor-pointer hover:underline">Change address</span>
+                            <div className={`${expand ? 'max-h-[233px]' : 'max-h-0'} overflow-hidden mt-5 transition-all ease-linear duration-500`}>
+                                <Dropdown 
+                                options={options} 
+                                value={options[0]} 
+                                className="cart-custom-dropdown"
+                                placeholder="Select your region" />
+                                <input className="w-full mt-3 bg-gray-200 border-0 rounded-md" type="text" placeholder="Address"/>
+                                <button className="bg-primary-900 mt-4 px-5 py-2 text-white rounded-md text-sm">
+                                    Update
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <div className="py-3 border-b border-gray-200 flex justify-between items-center">
+                        <span className="font-medium">Total</span>
+                        <span className="font-medium text-lg"> ${(subTotal+ 25).toFixed(2)}</span>
+                    </div>
+                    <Link href={`/cart`} 
+                    className="bg-ternary-400 mt-4 px-5 py-3 w-full text-primary-900 font-medium rounded-md text-sm">
+                        Proceed to checkout
+                    </Link>
                 </div>
             </div>
         </div>
