@@ -27,7 +27,7 @@ const ProductAd = (props) => {
     }, []);
 
     const advertisement_category= categories[apiCategoryIndex] ? categories[apiCategoryIndex] : '';
-    const category_name = advertisement_category ? advertisement_category.title.replace(/\s/g, '-') : '';
+    const category_name = advertisement_category ? advertisement_category.title.replace(/\s/g, '-').toLowerCase().replace(/&/g, 'and') : '';
 
     return(
         <Link 

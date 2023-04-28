@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import ProductCard from "../../components/productCard";
 import axios from "axios";
 
-const SearchResults = () => {
+const SearchResults = (props) => {
+    const {cart, setCart, quantity, setQuantity, addToCart , incrementQuantity, decrementQuantity} = props;
     const [products , setProducts ] = useState([]);
     const router = useRouter();
     const searched_id = router.query.id;
@@ -30,10 +31,15 @@ const SearchResults = () => {
 
                             return(
                                 <ProductCard
-                                    index={key}
-                                    title={product.title}
-                                    price={product.price}
-                                    image={product.image}
+                                index={key}
+                                product={product}
+                                cart={cart}
+                                setCart={setCart}
+                                quantity={quantity}
+                                setQuantity={setQuantity}
+                                addToCart={addToCart}
+                                incrementQuantity={incrementQuantity}
+                                decrementQuantity={decrementQuantity}
                                 />
                             );
                         } 

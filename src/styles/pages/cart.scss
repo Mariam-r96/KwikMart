@@ -1,0 +1,18 @@
+.cart-custom-dropdown{
+
+    .Dropdown-control{
+        @apply bg-gray-200 border-0 rounded-md;
+
+        .Dropdown-placeholder{
+            @apply text-left;
+        }
+
+        .Dropdown-arrow{
+            @apply top-1/2 -translate-y-1/2;
+        }
+    }
+
+    .Dropdown-menu{
+        @apply border-gray-200 mt-1 relative max-h-32;
+    }
+}
