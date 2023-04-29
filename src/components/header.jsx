@@ -12,6 +12,8 @@ const Header = (props) => {
   const [filteredProducts , setFilteredProducts ] = useState([]);
   const [showList , setShowList] = useState(false);
   const [showCart , setShowCart] = useState(false);
+  const [showUserMenu , setShowUserMenu] = useState(false);
+  const [showModal , setShowModal] = useState(false);
   const router = useRouter();
   
   useEffect(() => {
@@ -96,117 +98,133 @@ const Header = (props) => {
 
   return(
     <header className="container border-gray-100 border-b px-4">
-    <div className="flex items-center py-6 border-gray-100 border-b">
-        <Link href={`/`} className="flex items-center">
-            <span className="material-symbols-rounded text-ternary-500 mr-2 text-4xl font-medium">shopping_cart</span>
-            <span className="text-primary-900 font-bold text-xl">KwikMart</span>
-        </Link>
-        <div className="hidden md:block relative ml-auto mr-5">
-            <input 
-            className="bg-gray-100 p-3 rounded-md w-96 header-search-field" 
-            onChange={e => filterSearch(e)} 
-            onFocus={() => setShowList(true)}
-            onBlur={(e) => handleBlur(e)}
-            type="text" 
-            placeholder="Search"/>
-            <span className="material-symbols-rounded absolute right-4 top-1/2 -translate-y-1/2">search</span>
+      <div className="flex items-center py-6 border-gray-100 border-b">
+          <Link href={`/`} className="flex items-center">
+              <span className="material-symbols-rounded text-ternary-500 mr-2 text-4xl font-medium">shopping_cart</span>
+              <span className="text-primary-900 font-bold text-xl">KwikMart</span>
+          </Link>
+          <div className="hidden md:block relative ml-auto mr-5">
+              <input 
+              className="bg-gray-100 p-3 rounded-md w-96 header-search-field" 
+              onChange={e => filterSearch(e)} 
+              onFocus={() => setShowList(true)}
+              onBlur={(e) => handleBlur(e)}
+              type="text" 
+              placeholder="Search"/>
+              <span className="material-symbols-rounded absolute right-4 top-1/2 -translate-y-1/2">search</span>
 
-            <ul className={`${showList && filteredProducts.length > 0 ? '' : 'hidden'} absolute w-full bg-white shadow-md top-14 max-h-64 overflow-y-auto z-30`}>
-              {filteredProducts && filteredProducts.length > 0 && filteredProducts.map((filteredItem , key) => {
-                return(
-                  <li 
-                  key={key} 
-                  className="search-list-item px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-secondary-50"
-                  onClick={e => selectFilteredItem(filteredItem.title, filteredItem._id)}>
-                    <div className="flex items-center pointer-events-none">
-                      <div className="w-12 mr-4">
-                        <img className="w-full h-full object-cover" src={filteredItem.image} />
+              <ul className={`${showList && filteredProducts.length > 0 ? '' : 'hidden'} absolute w-full bg-white shadow-md top-14 max-h-64 overflow-y-auto z-30`}>
+                {filteredProducts && filteredProducts.length > 0 && filteredProducts.map((filteredItem , key) => {
+                  return(
+                    <li 
+                    key={key} 
+                    className="search-list-item px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-secondary-50"
+                    onClick={e => selectFilteredItem(filteredItem.title, filteredItem._id)}>
+                      <div className="flex items-center pointer-events-none">
+                        <div className="w-12 mr-4">
+                          <img className="w-full h-full object-cover" src={filteredItem.image} />
+                        </div>
+                        <p>{filteredItem.title}</p> 
                       </div>
-                       <p>{filteredItem.title}</p> 
-                    </div>
-                  </li>
-                )
-              })}
+                    </li>
+                  )
+                })}
+              </ul>
+          </div>
+          <div className="mr-5 ml-auto md:ml-0 relative">
+            <span 
+            onClick={ e => setShowUserMenu(!showUserMenu)}
+            className="material-symbols-rounded cursor-pointer text-3xl">account_circle</span>
+            <ul className={`${showUserMenu ? '' : 'hidden'} border border-gray-200 rounded-md bg-white z-30 px-4 py-2 absolute -left-20 w-48`}>
+                <li className="py-2 px-3 border-b border-gray-300 last-of-type:border-b-0">
+                  <Link href={"/"}>Profile</Link>
+                </li>
+                <li className="py-2 px-3 border-b border-gray-300 last-of-type:border-b-0">
+                  <Link href={"/"}>Orders</Link>
+                </li>
+                <li
+                className="py-2 px-3 whitespace-nowrap bg-secondary-400 text-center my-3 rounded-md text-white cursor-pointer border-b border-gray-300 last-of-type:border-b-0">
+                  <Link onClick={ e => setShowUserMenu(false)} href={"/register"}>Sign Up</Link>
+                </li>
             </ul>
-        </div>
-        <span className="material-symbols-rounded cursor-pointer text-3xl mr-5 ml-auto md:ml-0">account_circle</span>
-        <div 
-        onClick={e => router.push(`/cart`)}
-        className="cart relative cursor-pointer before:content-[''] before:absolute before:h-12 before:w-20 before:bg-transparent before:-bottom-8 before:-left-1/2"
-        onMouseEnter={() => setShowCart(true)}
-        onMouseLeave={() => setShowCart(false)}>
-            <span className="material-symbols-rounded text-red-600 p-2 bg-red-200 rounded-full">local_mall</span>
-            <span className="rounded-full bg-red-600 text-white text-[12px] text-center w-5 h-5 leading-5 absolute -top-2 -right-1">{props.totalItems}</span>
-        </div>
-    </div>
+          </div>
+          <div 
+          onClick={e => router.push(`/cart`)}
+          className="cart relative cursor-pointer before:content-[''] before:absolute before:h-12 before:w-20 before:bg-transparent before:-bottom-8 before:-left-1/2"
+          onMouseEnter={() => setShowCart(true)}
+          onMouseLeave={() => setShowCart(false)}>
+              <span className="material-symbols-rounded text-red-600 p-2 bg-red-200 rounded-full">local_mall</span>
+              <span className="rounded-full bg-red-600 text-white text-[12px] text-center w-5 h-5 leading-5 absolute -top-2 -right-1">{props.totalItems}</span>
+          </div>
+      </div>
 
-    <Navbar className="py-6 flex justify-between items-center relative">
-      <Dropdown
-      className={styles.dropdown_menu} 
-      
-        label="Select Category"
-      >
-        {categories.length > 0 && categories.map((option, key) => {
-          return(
-            <Dropdown.Item key={key} onClick={e => onDropdownSelect(option.title, option._id)}>
-              {option.title}
-            </Dropdown.Item>
-          )
-        })}
-      </Dropdown>
-      <Navbar.Toggle className={styles.custom_navbar_toggle} />
-      <Navbar.Collapse>
-        <ul className={`flex items-center flex-col md:flex-row shadow-md px-4 py-2 md:shadow-none md:px-0 border border-gray-200 md:border-0 ${styles.mobile_menu}`}>
-          {menuItems && menuItems.length > 0 && menuItems.map( (item , key ) => {
+      <Navbar className="py-6 flex justify-between items-center relative">
+        <Dropdown
+        className={styles.dropdown_menu} 
+        
+          label="Select Category"
+        >
+          {categories.length > 0 && categories.map((option, key) => {
             return(
-              <li key={key} className="py-2 w-full md:w-auto md:px-4 md:rounded-3xl md:hover:bg-secondary-100 md:hover:text-secondary-500 md:mr-4 md:last-of-type:mr-0 border-b border-gray-200 md:border-b-0 last-of-type:border-b-0">
-                <Link href={item.url}>{item.title}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      </Navbar.Collapse>
-      <div 
-      onMouseEnter={() => setShowCart(true)}
-      onMouseLeave={() => setShowCart(false)}
-      className={`${showCart ? '' : 'hidden'} pb-4 px-4 w-80 absolute rounded-md shadow-lg border border-gray-100 bg-white -top-1 right-0 z-20`}>
-      {props.cart && props.cart.length > 0 ? 
-        <>
-          <ul className={`px-0`}>
-          {props.cart.map((cartItem , key) => {
-            return(
-              <li key={key} className="flex items-center py-3 border-b border-gray-200">
-                <div className="h-full w-10 mr-4 relative">
-                  <span
-                  onClick = {()=> props.deleteCartItem(cartItem)}
-                  className="material-icons absolute -top-2 -left-2 text-base text-orange-600 cursor-pointer">cancel</span>
-                  <img className="w-full h-full object-cover" src={cartItem.image}/>
-                </div>
-                <div className="flex flex-col text-gray-700">
-                  <h5 className="font-medium text-sm">{cartItem.title}</h5>
-                  <p className="text-sm mt-2 font-sans">{cartItem.qty} x <span className="text-red-600">${cartItem.price}</span></p>
-                </div>
-              </li>
+              <Dropdown.Item key={key} onClick={e => onDropdownSelect(option.title, option._id)}>
+                {option.title}
+              </Dropdown.Item>
             )
           })}
+        </Dropdown>
+        <Navbar.Toggle className={styles.custom_navbar_toggle} />
+        <Navbar.Collapse>
+          <ul className={`flex items-center flex-col md:flex-row shadow-md px-4 py-2 md:shadow-none md:px-0 border border-gray-200 md:border-0 ${styles.mobile_menu}`}>
+            {menuItems && menuItems.length > 0 && menuItems.map( (item , key ) => {
+              return(
+                <li key={key} className="py-2 w-full md:w-auto md:px-4 md:rounded-3xl md:hover:bg-secondary-100 md:hover:text-secondary-500 md:mr-4 md:last-of-type:mr-0 border-b border-gray-200 md:border-b-0 last-of-type:border-b-0">
+                  <Link href={item.url}>{item.title}</Link>
+                </li>
+              );
+            })}
           </ul>
-          <div className="py-6 flex items-center justify-between">
-            <span className="text-gray-500">SubTotal:</span>
-            <span className="text-red-600 font-medium">${props.subTotal.toFixed(2)}</span>
-          </div>
-          <Link 
-          href={'/cart'} 
-          className="block bg-white border border-gray-200 p-3 text-center">View Cart</Link>
-          <Link 
-          href={'/checkout'}
-          className="block bg-red-600 mt-3 text-white p-3 text-center">Checkout</Link>
-        </>
-      : <div className="p-10 flex justify-center flex-col items-center">
-          <span className="material-icons bg-gray-300 rounded-full p-5 text-red-500">local_mall</span>
-          <h5 className="font-medium mt-3 text-gray-600">No products in the cart.</h5>
-        </div>}
-      </div>
-    </Navbar>
+        </Navbar.Collapse>
+        <div 
+        onMouseEnter={() => setShowCart(true)}
+        onMouseLeave={() => setShowCart(false)}
+        className={`${showCart ? '' : 'hidden'} pb-4 px-4 w-80 absolute rounded-md shadow-lg border border-gray-100 bg-white -top-1 right-0 z-20`}>
+        {props.cart && props.cart.length > 0 ? 
+          <>
+            <ul className={`px-0`}>
+            {props.cart.map((cartItem , key) => {
+              return(
+                <li key={key} className="flex items-center py-3 border-b border-gray-200">
+                  <div className="h-full w-10 mr-4 relative">
+                    <span
+                    onClick = {()=> props.deleteCartItem(cartItem)}
+                    className="material-icons absolute -top-2 -left-2 text-base text-orange-600 cursor-pointer">cancel</span>
+                    <img className="w-full h-full object-cover" src={cartItem.image}/>
+                  </div>
+                  <div className="flex flex-col text-gray-700">
+                    <h5 className="font-medium text-sm">{cartItem.title}</h5>
+                    <p className="text-sm mt-2 font-sans">{cartItem.qty} x <span className="text-red-600">${cartItem.price}</span></p>
+                  </div>
+                </li>
+              )
+            })}
+            </ul>
+            <div className="py-6 flex items-center justify-between">
+              <span className="text-gray-500">SubTotal:</span>
+              <span className="text-red-600 font-medium">${props.subTotal.toFixed(2)}</span>
+            </div>
+            <Link 
+            href={'/cart'} 
+            className="block bg-white border border-gray-200 p-3 text-center">View Cart</Link>
+            <Link 
+            href={'/checkout'}
+            className="block bg-red-600 mt-3 text-white p-3 text-center">Checkout</Link>
+          </>
+        : <div className="p-10 flex justify-center flex-col items-center">
+            <span className="material-icons bg-gray-300 rounded-full p-5 text-red-500">local_mall</span>
+            <h5 className="font-medium mt-3 text-gray-600">No products in the cart.</h5>
+          </div>}
+        </div>
+      </Navbar>
     </header>
   );
 }
