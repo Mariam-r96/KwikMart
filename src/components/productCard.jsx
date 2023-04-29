@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 const ProductCard = (props) => {
-  const { index, product , quantity, setQuantity, addToCart ,incrementQuantity , decrementQuantity} = props;
+    const { index, product , quantity, setQuantity, addToCart ,incrementQuantity , decrementQuantity} = props;
     const [favourite , setFavourite ] = useState(undefined);
     const [showButton, setShowButton] = useState(true);
 

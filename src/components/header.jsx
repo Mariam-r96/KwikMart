@@ -111,7 +111,7 @@ const Header = (props) => {
             placeholder="Search"/>
             <span className="material-symbols-rounded absolute right-4 top-1/2 -translate-y-1/2">search</span>
 
-            <ul className={`${showList && filteredProducts.length > 0 ? '' : 'hidden'} absolute w-full bg-white shadow-md top-14 max-h-64 overflow-y-auto z-10`}>
+            <ul className={`${showList && filteredProducts.length > 0 ? '' : 'hidden'} absolute w-full bg-white shadow-md top-14 max-h-64 overflow-y-auto z-30`}>
               {filteredProducts && filteredProducts.length > 0 && filteredProducts.map((filteredItem , key) => {
                 return(
                   <li 
@@ -196,8 +196,10 @@ const Header = (props) => {
           </div>
           <Link 
           href={'/cart'} 
+          onClick={e => closeFilteredList(e)}
           className="block bg-white border border-gray-200 p-3 text-center">View Cart</Link>
           <Link 
+          onClick={e => closeFilteredList(e)}
           href={'/checkout'}
           className="block bg-red-600 mt-3 text-white p-3 text-center">Checkout</Link>
         </>

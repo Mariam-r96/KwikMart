@@ -14,15 +14,15 @@ const Cart = (props) => {
     deleteCartItem,
   } = props;
 
-  useEffect(() => {
-    axios.post(`https://shodai.herokuapp.com/api/orders` , {cart})
-    .then( response => {
-      console.log(response);
-    })
-    .catch( error =>{
-      console.log(error);
-    });
-  }, []);
+//   useEffect(() => {
+//     axios.post(`https://shodai.herokuapp.com/api/orders` , {cart})
+//     .then( response => {
+//       console.log(response);
+//     })
+//     .catch( error =>{
+//       console.log(error);
+//     });
+//   }, []);
 
   const [expand, setExpand] = useState(false);
 
