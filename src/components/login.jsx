@@ -4,7 +4,7 @@ import { Label, TextInput } from "flowbite-react";
 import * as Yup from "yup";
 import axios from "axios";
 
-const SignupSchema = Yup.object().shape({
+const LoginSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First name required")
     .min(2, "First name too short.")
@@ -24,7 +24,7 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email required"),
 });
 
-const SignUp = () => {
+const Login = () => {
 
     const loginUser = (user) => {
         axios
@@ -40,39 +40,27 @@ const SignUp = () => {
   return (
     <div>
       <h1 className="text-center text-xl text-primary-800 font-semibold mb-8">
-        REGISTER
+        LOGIN
       </h1>
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
           username: "",
-          email: "",
           password: "",
         }}
-        validationSchema={SignupSchema}
+        validationSchema={LoginSchema}
         onSubmit={(values) => {
-          const register_params = {
-            firstName: values.firstName,
-            lastName: values.lastName,
+          const login_params = {
             username: values.username,
-            email: values.email,
             password: values.password,
           };
-
-           axios
-            .post(`https://shodai.herokuapp.com/api/register`, register_params)
-             .then((response) => {
-            //    console.log(response.data);
-               const loginParams = {
-                 username : register_params.username,
-                 password : register_params.password
-               }
-               loginUser(loginParams);
-             })
-             .catch((error) => {
-               console.log(error);
-             });
+          axios
+          .post(`https://shodai.herokuapp.com/api/login`, login_params)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         }}
       >
         {({
@@ -84,52 +72,6 @@ const SignUp = () => {
           handleChange,
         }) => (
           <Form className="flex flex-col">
-            <div className="flex gap-6">
-              <div className="w-1/2">
-                <div className="mb-2 block">
-                  <Label htmlFor="firstName" value="First Name" />
-                </div>
-                <TextInput
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  value={values.firstName || ""}
-                  color={`${
-                    errors.firstName && touched.firstName ? "failure" : "gray"
-                  }`}
-                  sizing="md"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={
-                    errors.firstName && touched.firstName ? (
-                      <span className="font-medium">{errors.firstName}</span>
-                    ) : null
-                  }
-                />
-              </div>
-              <div className="w-1/2">
-                <div className="mb-2 block">
-                  <Label htmlFor="lastName" value="Last Name" />
-                </div>
-                <TextInput
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  sizing="md"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.lastName || ""}
-                  color={`${
-                    errors.lastName && touched.lastName ? "failure" : "gray"
-                  }`}
-                  helperText={
-                    errors.lastName && touched.lastName ? (
-                      <span className="font-medium">{errors.lastName}</span>
-                    ) : null
-                  }
-                />
-              </div>
-            </div>
             <div className="mt-4">
               <div className="mb-2 block">
                 <Label htmlFor="username" value="Username" />
@@ -148,26 +90,6 @@ const SignUp = () => {
                 helperText={
                   errors.username && touched.username ? (
                     <span className="font-medium">{errors.username}</span>
-                  ) : null
-                }
-              />
-            </div>
-            <div className="mt-4">
-              <div className="mb-2 block">
-                <Label htmlFor="email" value="Email" />
-              </div>
-              <TextInput
-                id="email"
-                name="email"
-                type="email"
-                sizing="md"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                color={`${errors.email && touched.email ? "failure" : "gray"}`}
-                helperText={
-                  errors.email && touched.email ? (
-                    <span className="font-medium">{errors.email}</span>
                   ) : null
                 }
               />
@@ -198,7 +120,7 @@ const SignUp = () => {
               className="bg-primary-900 px-5 py-4 mt-6 text-white rounded-md"
               type="submit"
             >
-              Register
+              Login
             </button>
           </Form>
         )}
@@ -207,4 +129,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
