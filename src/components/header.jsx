@@ -196,9 +196,11 @@ const Header = (props) => {
           </div>
           <Link 
           href={'/cart'} 
+          onClick={() => setShowCart(false)}
           className="block bg-white border border-gray-200 p-3 text-center">View Cart</Link>
           <Link 
           href={'/checkout'}
+          onClick={() => setShowCart(false)}
           className="block bg-red-600 mt-3 text-white p-3 text-center">Checkout</Link>
         </>
       : <div className="p-10 flex justify-center flex-col items-center">
