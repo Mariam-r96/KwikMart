@@ -5,38 +5,17 @@ import * as Yup from "yup";
 import axios from "axios";
 
 const LoginSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .required("First name required")
-    .min(2, "First name too short.")
-    .max(50, "First name too long (should have maximum 50 characters)."),
-  lastName: Yup.string()
-    .required("Last name required")
-    .min(2, "Last name too short.")
-    .max(50, "Last name too long (should have maximum 50 characters)."),
   username: Yup.string()
-    .required("Username required")
-    .min(2, "Username too short.")
+    .required("username required")
+    .min(2, "username too short.")
     .max(8, "First name too long (should have maximum 8 characters)."),
   password: Yup.string()
     .required("No password provided.")
-    .min(4, "Password is too short - should have atleast 4 characters.")
-    .max(6, "Password is too long - should have atmost 6 characters."),
-  email: Yup.string().email("Invalid email").required("Email required"),
+    .min(4, "password is too short - should have atleast 4 characters.")
+    .max(6, "password is too long - should have atmost 6 characters."),
 });
 
 const Login = () => {
-
-    const loginUser = (user) => {
-        axios
-        .post(`https://shodai.herokuapp.com/api/login`, user)
-        .then((response) => {
-        //   console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-
   return (
     <div>
       <h1 className="text-center text-xl text-primary-800 font-semibold mb-8">
@@ -56,7 +35,7 @@ const Login = () => {
           axios
           .post(`https://shodai.herokuapp.com/api/login`, login_params)
           .then((response) => {
-            console.log(response.data);
+            localStorage.setItem("token" , JSON.stringify(response.data.token));
           })
           .catch((error) => {
             console.log(error);
@@ -74,7 +53,7 @@ const Login = () => {
           <Form className="flex flex-col">
             <div className="mt-4">
               <div className="mb-2 block">
-                <Label htmlFor="username" value="Username" />
+                <Label htmlFor="username" value="username" />
               </div>
               <TextInput
                 id="username"
@@ -96,7 +75,7 @@ const Login = () => {
             </div>
             <div className="mt-4">
               <div className="mb-2 block">
-                <Label htmlFor="password" value="Password" />
+                <Label htmlFor="password" value="password" />
               </div>
               <TextInput
                 id="password"

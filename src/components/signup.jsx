@@ -30,7 +30,7 @@ const SignUp = () => {
         axios
         .post(`https://shodai.herokuapp.com/api/login`, user)
         .then((response) => {
-        //   console.log(response.data);
+          console.log(response.data, "logged in");
         })
         .catch((error) => {
           console.log(error);
@@ -63,7 +63,7 @@ const SignUp = () => {
            axios
             .post(`https://shodai.herokuapp.com/api/register`, register_params)
              .then((response) => {
-            //    console.log(response.data);
+               console.log(response.data);
                const loginParams = {
                  username : register_params.username,
                  password : register_params.password
