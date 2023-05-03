@@ -1,7 +1,6 @@
 import Breadcrumb from "../../components/breadcrumb";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../state/user";
-import { user } from "../../state/user";
 import { useEffect } from "react";
 
 const MyAccount = (props) => {
@@ -18,7 +17,7 @@ const MyAccount = (props) => {
       {userInfo ? 
         <div className="grid grid-cols-12 items-center mt-8">
             <div className="col-span-4 text-center">
-              <span class="material-icons text-[224px] text-primary-800">account_circle</span>
+              <span className="material-icons text-[224px] text-primary-800">account_circle</span>
               <h5 className="font-semibold text-primary-900">{userInfo.username}</h5>
             </div>
             <div className="col-span-8">

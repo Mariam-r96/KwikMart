@@ -1,14 +1,13 @@
 import React , { useState , useEffect} from 'react';
 import ProductCard from '../components/productCard';
-import axios from 'axios';
 import ProductAd from '../components/productAdvertise';
+import { coreAxios } from '../utils/axios';
 
 const Home = (props) =>{
     const [products , setProducts ] = useState([]);
-    const [categories , setCategories ] = useState([]);
   
     useEffect(() => {
-      axios.get(`https://shodai.herokuapp.com/api/products`)
+      coreAxios.get(`/api/products`)
       .then( response => {
         setProducts(response.data);
       })

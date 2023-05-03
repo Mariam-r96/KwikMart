@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import ProductCard from "../../components/productCard";
 import BreadCrumb from "../../components/breadcrumb";
 import PuffLoader from "react-spinners/PuffLoader";
+import { coreAxios } from "../../utils/axios";
 
 const CategoryBasedProducts = (props) => {
   const {
@@ -28,9 +28,9 @@ const CategoryBasedProducts = (props) => {
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
 
-    axios
+    coreAxios
       .get(
-        `https://shodai.herokuapp.com/api/category/${
+        `/api/category/${
           query.productCategory ? query.productCategory : ""
         }`
       )

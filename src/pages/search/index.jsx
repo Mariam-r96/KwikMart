@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductCard from "../../components/productCard";
-import axios from "axios";
 import { PuffLoader } from "react-spinners";
+import { coreAxios } from "../../utils/axios";
 
 const SearchResults = (props) => {
   const {
@@ -21,8 +21,8 @@ const SearchResults = (props) => {
   console.log(searched_id);
 
   useEffect(() => {
-    axios
-      .get(`https://shodai.herokuapp.com/api/products`)
+    coreAxios
+      .get(`/api/products`)
       .then((response) => {
         setProducts(response.data);
       })

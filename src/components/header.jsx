@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Dropdown, Navbar } from "flowbite-react";
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../state/user";
 import Avatar from 'react-avatar';
+import { coreAxios } from "../utils/axios";
 
 const Header = (props) => {
   const [categories , setCategories ] = useState([]);
@@ -16,13 +16,12 @@ const Header = (props) => {
   const [showList , setShowList] = useState(false);
   const [showCart , setShowCart] = useState(false);
   const [showUserMenu , setShowUserMenu] = useState(false);
-  const [showModal , setShowModal] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const userInfo = useSelector((state)=>state.user.user);
   
   useEffect(() => {
-    axios.get(`https://shodai.herokuapp.com/api/products/categories`)
+    coreAxios.get(`/api/products/categories`)
     .then( response => {
       setCategories(response.data);
     })
@@ -30,7 +29,7 @@ const Header = (props) => {
       console.log(error);
     });
 
-    axios.get(`https://shodai.herokuapp.com/api/products`)
+    coreAxios.get(`/api/products`)
     .then( response => {
       setProducts(response.data);
     })
@@ -141,6 +140,7 @@ const Header = (props) => {
           <div className="mr-5 ml-auto md:ml-0 relative">
             { userInfo? 
               <Avatar 
+              className="rounded-full cursor-pointer"
               onClick={ e => setShowUserMenu(!showUserMenu)}
               name={userInfo.username} round="true" size="35px"/> 
               :
@@ -149,10 +149,10 @@ const Header = (props) => {
               className="material-symbols-rounded cursor-pointer text-3xl">account_circle</span>
             }
 
-            <ul className={`${showUserMenu ? '' : 'hidden'} border border-gray-200 rounded-md bg-white z-30 px-4 py-2 absolute -left-20 w-48`}>
+            <ul className={`${showUserMenu ? '' : 'hidden'} border border-gray-200 rounded-md bg-white z-30 px-4 py-2 absolute -left-20 w-52`}>
                 { userInfo  ? 
-                      <li className="py-2 px-3 border-b border-gray-300 last-of-type:border-b-0">
-                        <Link href={"/my-account"}>Welcome {userInfo.username}</Link>
+                      <li className="py-4 px-3 bg-gray-50 my-2 border-b border-gray-300 last-of-type:border-b-0">
+                            Welcome {userInfo.username}
                       </li>
                   : ''
                 }
