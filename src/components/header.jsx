@@ -1,10 +1,13 @@
-import React , {useEffect , useState, createContext} from "react";
+import React , {useEffect , useState} from "react";
 import { useRouter } from 'next/router'
 import Link from "next/link";
 import { Dropdown, Navbar } from "flowbite-react";
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../state/user";
+import Avatar from 'react-avatar';
 
 const Header = (props) => {
   const [categories , setCategories ] = useState([]);
@@ -15,6 +18,8 @@ const Header = (props) => {
   const [showUserMenu , setShowUserMenu] = useState(false);
   const [showModal , setShowModal] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state)=>state.user.user);
   
   useEffect(() => {
     axios.get(`https://shodai.herokuapp.com/api/products/categories`)
@@ -32,6 +37,8 @@ const Header = (props) => {
     .catch( error =>{
       console.log(error);
     });
+
+    dispatch(getUser());
   }, []);
 
   // category_options.unshift({value : 'All  categories' , label : 'All categories' });
@@ -43,7 +50,7 @@ const Header = (props) => {
     },
     {
       title : "My Account",
-      url :'/'
+      url :'/my-account'
     },
     {
       title : "Contact",
@@ -132,20 +139,42 @@ const Header = (props) => {
               </ul>
           </div>
           <div className="mr-5 ml-auto md:ml-0 relative">
-            <span 
-            onClick={ e => setShowUserMenu(!showUserMenu)}
-            className="material-symbols-rounded cursor-pointer text-3xl">account_circle</span>
+            { userInfo? 
+              <Avatar 
+              onClick={ e => setShowUserMenu(!showUserMenu)}
+              name={userInfo.username} round="true" size="35px"/> 
+              :
+              <span 
+              onClick={ e => setShowUserMenu(!showUserMenu)}
+              className="material-symbols-rounded cursor-pointer text-3xl">account_circle</span>
+            }
+
             <ul className={`${showUserMenu ? '' : 'hidden'} border border-gray-200 rounded-md bg-white z-30 px-4 py-2 absolute -left-20 w-48`}>
+                { userInfo  ? 
+                      <li className="py-2 px-3 border-b border-gray-300 last-of-type:border-b-0">
+                        <Link href={"/my-account"}>Welcome {userInfo.username}</Link>
+                      </li>
+                  : ''
+                }
+              
                 <li className="py-2 px-3 border-b border-gray-300 last-of-type:border-b-0">
-                  <Link href={"/"}>Profile</Link>
+                  <Link href={"/my-account"}>Profile</Link>
                 </li>
                 <li className="py-2 px-3 border-b border-gray-300 last-of-type:border-b-0">
                   <Link href={"/"}>Orders</Link>
                 </li>
-                <li
-                className="py-2 px-3 whitespace-nowrap bg-secondary-400 text-center my-3 rounded-md text-white cursor-pointer border-b border-gray-300 last-of-type:border-b-0">
-                  <Link onClick={ e => setShowUserMenu(false)} href={"/register"}>Sign Up</Link>
-                </li>
+                { userInfo  ? 
+                  <li
+                  className="py-2 px-3 whitespace-nowrap bg-secondary-400 text-center my-3 rounded-md text-white cursor-pointer border-b border-gray-300 last-of-type:border-b-0">
+                    <button onClick={ e => setShowUserMenu(false)}>Sign Out</button>
+                  </li>
+                  : 
+                  <li
+                  className="py-2 px-3 whitespace-nowrap bg-secondary-400 text-center my-3 rounded-md text-white cursor-pointer border-b border-gray-300 last-of-type:border-b-0">
+                    <Link onClick={ e => setShowUserMenu(false)} href={"/my-account/login"}>Sign In</Link>
+                  </li>
+                }
+         
             </ul>
           </div>
           <div 

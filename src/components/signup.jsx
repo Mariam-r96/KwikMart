@@ -2,7 +2,8 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { Label, TextInput } from "flowbite-react";
 import * as Yup from "yup";
-import axios from "axios";
+import Link from "next/link";
+import { coreAxios } from "../utils/axios";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -27,7 +28,7 @@ const SignupSchema = Yup.object().shape({
 const SignUp = () => {
 
     const loginUser = (user) => {
-        axios
+        coreAxios
         .post(`https://shodai.herokuapp.com/api/login`, user)
         .then((response) => {
           console.log(response.data, "logged in");
@@ -60,7 +61,7 @@ const SignUp = () => {
             password: values.password,
           };
 
-           axios
+           coreAxios
             .post(`https://shodai.herokuapp.com/api/register`, register_params)
              .then((response) => {
                console.log(response.data);
@@ -200,6 +201,7 @@ const SignUp = () => {
             >
               Register
             </button>
+            <Link className="text-center text-ternary-500 font-medium mt-6" href={'/my-account/login'}>Already have an account? Login here</Link>
           </Form>
         )}
       </Formik>

@@ -1,5 +1,5 @@
 import BreadCrumb from "@/components/breadcrumb";
-import Login from "../../components/login";
+import Login from "../../../components/login";
 
 const LoginPage = (props) => {
     return(

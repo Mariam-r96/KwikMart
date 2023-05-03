@@ -1,5 +1,5 @@
 import BreadCrumb from "@/components/breadcrumb";
-import SignUp from "@/components/signup";
+import SignUp from "../../../components/signup";
 
 const Register = (props) => {
     return(

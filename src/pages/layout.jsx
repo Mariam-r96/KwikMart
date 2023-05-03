@@ -2,11 +2,16 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import React, { useState, useEffect, cloneElement, Children } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../state/user";
 
 const MainLayout = (props) => {
     const { children, ...rest } = props;
     const [products , setProducts ] = useState([0]);
     const [searchValue , setSearchValue] = useState('');
+    const dispatch = useDispatch();
+    const userInfo = useSelector((state)=>state.user.user)
+    console.log("user from layout", userInfo)
    
     const [quantity , setQuantity] = useState(0);
     const [totalItems , setTotalItems] = useState(0);
@@ -22,6 +27,7 @@ const MainLayout = (props) => {
         totalAmount += item.price; 
       });
       setSubTotal(totalAmount);
+      dispatch(getUser());
     }, []);
 
     useEffect(() => {
