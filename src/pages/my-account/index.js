@@ -1,6 +1,6 @@
 import Breadcrumb from "../../components/breadcrumb";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../state/user";
+import { getUser } from "../../redux/userSlice";
 import { useEffect } from "react";
 
 const MyAccount = (props) => {

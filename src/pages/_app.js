@@ -1,7 +1,7 @@
 import Head from "next/head";
 import '@/styles/globals.scss';
 import Layout from '@/pages/layout.jsx';
-import store from "../state/store";
+import store from "../redux/store";
 import { Provider } from 'react-redux'
 
 export default function MyApp({ Component, pageProps }) {

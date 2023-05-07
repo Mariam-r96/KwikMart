@@ -5,7 +5,7 @@ import { Dropdown, Navbar } from "flowbite-react";
 import 'react-dropdown/style.css';
 import styles from '@/styles/header.module.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../state/user";
+import { getUserAsync } from "../redux/userSlice";
 import Avatar from 'react-avatar';
 import { coreAxios } from "../utils/axios";
 
@@ -17,8 +17,8 @@ const Header = (props) => {
   const [showCart , setShowCart] = useState(false);
   const [showUserMenu , setShowUserMenu] = useState(false);
   const router = useRouter();
+  const userInfo = useSelector((state)=>state.user.userState);
   const dispatch = useDispatch();
-  const userInfo = useSelector((state)=>state.user.user);
   
   useEffect(() => {
     coreAxios.get(`/api/products/categories`)
@@ -37,8 +37,8 @@ const Header = (props) => {
       console.log(error);
     });
 
-    dispatch(getUser());
-  }, []);
+    dispatch(getUserAsync());
+  }, [userInfo]);
 
   // category_options.unshift({value : 'All  categories' , label : 'All categories' });
   
